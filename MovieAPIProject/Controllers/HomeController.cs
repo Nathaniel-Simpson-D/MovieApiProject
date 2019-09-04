@@ -51,15 +51,16 @@ namespace MovieAPIProject.Controllers
             return View(movie);
         }
 
-        public IActionResult AddMovieToFavorites(FavoriteMovies favMovie)
+        public IActionResult AddMovieToFavorites(int id)
         {
+            var movie = GetMovieById(id, _configuration).Result;
             AspNetUsers thisUser = _context.AspNetUsers.Where(u => u.UserName == User.Identity.Name).First();
 
             FavoriteMovies newFav = new FavoriteMovies();
-            newFav.Id = favMovie.Id;
-            newFav.UserId = favMovie.UserId;
-            newFav.Movie = favMovie.Movie;
-            newFav.MovieId = favMovie.MovieId;
+            
+            newFav.UserId = thisUser.Id;
+            newFav.Movie = movie.title;
+            newFav.MovieId = movie.id;
 
             if (ModelState.IsValid)
             {
@@ -76,6 +77,20 @@ namespace MovieAPIProject.Controllers
             AspNetUsers thisUser = _context.AspNetUsers.Where(u => u.UserName == User.Identity.Name).First();
             List<FavoriteMovies> favoriteList = _context.FavoriteMovies.Where(u => u.UserId == thisUser.Id).ToList();
             return View(favoriteList);
+        }
+
+        public IActionResult RemoveFavorite(int id)
+        {
+            foreach (var item in _context.FavoriteMovies.ToList())
+            {
+                if(item.MovieId == id)
+                {
+                    _context.FavoriteMovies.Remove(item);
+                }
+            }
+            _context.SaveChanges();
+            return RedirectToAction("GetFavoritesMovieList");
+
         }
         public static HttpClient GetClient()
         {
