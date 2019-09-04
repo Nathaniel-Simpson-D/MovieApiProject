@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieAPIProject.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using MovieAPIProject.Models;
 
 namespace MovieAPIProject
 {
@@ -43,7 +43,11 @@ namespace MovieAPIProject
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
+
+            var connection = "Server=.\\SQLExpress;Database=MovieAPIDb;Trusted_Connection=True;ConnectRetryCount=0;";
+            services.AddDbContext<MovieAPIDbContext>(options => options.UseSqlServer(connection));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
