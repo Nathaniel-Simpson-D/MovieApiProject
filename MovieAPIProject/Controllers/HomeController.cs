@@ -74,6 +74,13 @@ namespace MovieAPIProject.Controllers
             }
             return View("Index");
         }
+
+        public IActionResult GetFavoritesMovieList()
+        {
+            AspNetUsers thisUser = _context.AspNetUsers.Where(u => u.UserName == User.Identity.Name).First();
+            List<FavoriteMovies> favoriteList = _context.FavoriteMovies.Where(u => u.UserId == thisUser.Id).ToList();
+            return View(favoriteList);
+        }
         public static HttpClient GetClient()
         {
             HttpClient client = new HttpClient();
