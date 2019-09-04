@@ -9,24 +9,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols;
 using MovieAPIProject.Models;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieAPIProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _configuation;
-       
+        private readonly IConfiguration _configuration;
+        private readonly MovieAPIDbContext _context;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, MovieAPIDbContext context)
         {
-            _configuation = configuration;
+            _configuration = configuration;
+            _context = context;
         }
         public IActionResult Index()
         {
            
             return View();
         }
+
         public IActionResult SearchResult(string query)
         {
             var splited = query.Split(' ');
@@ -40,17 +42,37 @@ namespace MovieAPIProject.Controllers
                     resultQuery += item;
                 }
             }
-            var result = GetSearchByKeyWord(resultQuery, _configuation).Result;
+            var result = GetSearchByKeyWord(resultQuery, _configuration).Result;
             return RedirectToAction("Details",result);
         }
         public IActionResult Details(int id)
         {
-            var movie = GetMovieById(id, _configuation).Result;
+            var movie = GetMovieById(id, _configuration).Result;
             return View(movie);
         }
         public IActionResult Details(Movie movie)
         {
             return View(movie);
+        }
+
+        public IActionResult AddMovieToFavorites(FavoriteMovies favMovie)
+        {
+            AspNetUsers thisUser = _context.AspNetUsers.Where(u => u.UserName == User.Identity.Name).First();
+
+            FavoriteMovies newFav = new FavoriteMovies();
+            newFav.Id = favMovie.Id;
+            newFav.UserId = favMovie.UserId;
+            newFav.Movie = favMovie.Movie;
+            newFav.MovieId = favMovie.MovieId;
+
+            if (ModelState.IsValid)
+            {
+                _context.FavoriteMovies.Add(newFav);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View("Index");
         }
         public static HttpClient GetClient()
         {
