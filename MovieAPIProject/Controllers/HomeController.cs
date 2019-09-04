@@ -25,10 +25,8 @@ namespace MovieAPIProject.Controllers
         }
         public IActionResult Index()
         {
-           
             return View();
         }
-
         public IActionResult SearchResult(string query)
         {
             var splited = query.Split(' ');
@@ -95,11 +93,11 @@ namespace MovieAPIProject.Controllers
             var result = await response.Content.ReadAsAsync<Movie>();
             return result;
         }
-        public static async Task<Movie> GetSearchByKeyWord(string search,IConfiguration configuration)
+        public static async Task<Movie> GetSearchByKeyWord(string query,IConfiguration configuration)
         {
             var client = GetClient();
             string apiKey = configuration.GetSection("AppConfiguration")["ApiKey"];
-            var response = await client.GetAsync($"Search/Movie?api_key={apiKey}&query={search}");
+            var response = await client.GetAsync($"Search/Movie?api_key={apiKey}&query={query}");
             var result = await response.Content.ReadAsAsync<Movie>();
             return result;
         }

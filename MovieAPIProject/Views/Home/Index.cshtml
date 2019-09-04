@@ -1,14 +1,55 @@
-﻿
-    <link rel="stylesheet" href="../../Content/Index.css">
+﻿    ViewData["Title"] = "Home Page";
 
-    <h1>Welcome to Grand Movie Database</h1>
 
-    <form asp-action="Details" asp-controller="Home">
-        Search By Movie Id: <input type="text" name="id" value"" />
-        <input type="submit" value="Search" />
-    </form>
 
-    <form asp-action="SearchResults" asp-controller="Home">
-        Search by Title: <input type="text" name="query" value"" />
-        <input type="submit" value="Search" />
-    </form>
+
+
+
+
+}
+
+
+
+
+
+
+
+<h1>WELCOME TO THE GRAND CIRCUS MOVIE DATABASE</h1>
+
+
+
+
+
+
+
+<form asp-action="Details" asp-controller="Home" class="align-content-center">
+
+    Search By Movie Id: <input type="text" name="id" value"" />
+    <input type="submit" value="Search" />
+
+</form>
+<form asp-action="Details" asp-controller="Home" class="align-content-center">
+
+    Search By Movie Title: <input type="text" name="query" value"" />
+    <input type="submit" value="Search" />
+
+</form>
+
+<style>
+    body {
+        /*background-image: url('../../movieBackground.jpg');*/
+        background-size: cover;
+    }
+
+    h1 {
+        color: white;
+        font-weight: bolder;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        word-wrap: break-word;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 100px;
+        text-shadow: 2px 2px black;
+        text-align: center;
+    }
+</style> 
