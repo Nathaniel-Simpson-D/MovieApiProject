@@ -30,26 +30,24 @@ namespace MovieAPIProject.Controllers
         public IActionResult SearchResult(string query)
         {
             var splited = query.Split(' ');
-            string resultQuery = splited[0];
+            string resultQuery = "";
             int i = 0;
-            foreach(var item in splited)
+            foreach (var item in splited)
             {
-                if (i != 0)
+                resultQuery += item;
+                if (i != splited.Count() - 1)
                 {
-                    resultQuery += "+";
-                    resultQuery += item;
+                    resultQuery += "%20";
                 }
+
+                i++;
             }
             var result = GetSearchByKeyWord(resultQuery, _configuration).Result;
-            return RedirectToAction("Details",result);
+            return View(result.results);
         }
         public IActionResult Details(int id)
         {
             var movie = GetMovieById(id, _configuration).Result;
-            return View(movie);
-        }
-        public IActionResult Details(Movie movie)
-        {
             return View(movie);
         }
 
@@ -93,14 +91,15 @@ namespace MovieAPIProject.Controllers
             var result = await response.Content.ReadAsAsync<Movie>();
             return result;
         }
-        public static async Task<Movie> GetSearchByKeyWord(string query,IConfiguration configuration)
+        public static async Task<MovieList> GetSearchByKeyWord(string query, IConfiguration configuration)
         {
+
             var client = GetClient();
             string apiKey = configuration.GetSection("AppConfiguration")["ApiKey"];
-            var response = await client.GetAsync($"Search/Movie?api_key={apiKey}&query={query}");
-            var result = await response.Content.ReadAsAsync<Movie>();
+            var response = await client.GetAsync($"search/movie?api_key={apiKey}&language=en-US&query={query}&page=1&include_adult=false");
+            var result = await response.Content.ReadAsAsync<MovieList>();
             return result;
         }
-        
+
     }
 }
