@@ -1,0 +1,107 @@
+﻿@model IEnumerable<MovieAPIProject.Models.MovieTag>
+
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<h1>SearchResult</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.popularity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.video)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vote_count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vote_average)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.release_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.original_language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.original_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.backdrop_path)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.overview)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.poster_path)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.popularity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.video)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vote_count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vote_average)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.release_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.original_language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.original_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.backdrop_path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.overview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.poster_path)
+            </td>
+            <td>
+               
+                @Html.ActionLink("Details", "Details", new { id=item.id }) |
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
