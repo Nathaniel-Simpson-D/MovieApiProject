@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<link rel="stylesheet" href="../../Content/Index.css">
+
+<h1>Welcome to Grand Circus Movie Database</h1>
+
+<form asp-action="GetSearchResults" asp-controller="Home">
+    <input type="text" name="userSearch" value"" />
+    <input type="submit" value="Search" />
+</form>
