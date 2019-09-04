@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace MovieAPIProject.Models
 {
-<<<<<<< HEAD
+
 
     public class Movie
-=======
-    public class Rootobject
->>>>>>> 41377827129e13618efb51456d96dc69b76609bf
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }

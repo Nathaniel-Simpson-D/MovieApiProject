@@ -36,12 +36,7 @@ namespace MovieAPIProject
                 options.MinimumSameSitePolicy = SameSiteMode.None;
                
             });
-<<<<<<< HEAD
-            
-=======
 
-       
->>>>>>> 41377827129e13618efb51456d96dc69b76609bf
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
