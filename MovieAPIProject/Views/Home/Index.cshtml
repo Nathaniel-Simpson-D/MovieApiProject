@@ -1,28 +1,9 @@
-﻿    ViewData["Title"] = "Home Page";
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
+﻿
 <h1>WELCOME TO THE GRAND CIRCUS MOVIE DATABASE</h1>
 
 
 
-
-
-
-
-<form asp-action="Details" asp-controller="Home" class="align-content-center">
+<form asp-action="Details" asp-controller="Home">
 
     Search By Movie Id: <input type="text" name="id" value"" />
     <input type="submit" value="Search" />
@@ -37,7 +18,7 @@
 
 <style>
     body {
-        /*background-image: url('../../movieBackground.jpg');*/
+        background-image: url('../../movieBackground2.jpg');
         background-size: cover;
     }
 
@@ -52,4 +33,15 @@
         text-shadow: 2px 2px black;
         text-align: center;
     }
+
+    form{
+        color:white;
+    }
+
+  input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
 </style> 
