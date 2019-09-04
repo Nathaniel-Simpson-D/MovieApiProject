@@ -41,11 +41,15 @@ namespace MovieAPIProject.Controllers
                 }
             }
             var result = GetSearchByKeyWord(resultQuery, _configuation).Result;
-            return View(result);
+            return RedirectToAction("Details",result);
         }
         public IActionResult Details(int id)
         {
             var movie = GetMovieById(id, _configuation).Result;
+            return View(movie);
+        }
+        public IActionResult Details(Movie movie)
+        {
             return View(movie);
         }
         public static HttpClient GetClient()
