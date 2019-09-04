@@ -24,8 +24,13 @@ namespace MovieAPIProject.Controllers
         }
         public IActionResult Index()
         {
-            var movie = GetMovieById(550, _configuation).Result;
+           
             return View();
+        }
+        public IActionResult Details(int id)
+        {
+            var movie = GetMovieById(id, _configuation).Result;
+            return View(movie);
         }
         public static HttpClient GetClient()
         {

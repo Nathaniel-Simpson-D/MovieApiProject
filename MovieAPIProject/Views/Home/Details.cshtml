@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+@model MovieAPIProject.Models.Movie
+<h1>@Model.title</h1>
+<div>
+    <h5>Production Companies</h5>
+    @foreach (var item in Model.production_companies)
+    {
+        <p>@item.name</p>
+    }
+</div>
+<div>
+    <h5>Genres</h5>
+    @foreach (var item in Model.genres)
+    {
+        <p>@item.name</p>
+    }
+</div>
+<div>
+    <h5>Date Released</h5>        <p>@Model.release_date</p>
+</div>
+<div>
+    <h5>Run Time: @Model.runtime min</h5>
+</div>
+<div>
+    <h5>Summary</h5>
+    <p>@Model.overview</p>
+</div>
+@*<a href="/Home/AddToFav?id=@Model.id"><input type="submit" value="Favorite" class="btn btn-secondary"</a>*@
