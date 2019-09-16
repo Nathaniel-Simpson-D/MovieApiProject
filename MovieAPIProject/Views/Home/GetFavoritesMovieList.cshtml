@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "GetFavoritesMovieList";
+}
+@model  List<MovieAPIProject.Models.FavoriteMovies>
+<h1>GetFavoritesMovieList</h1>
+
+@foreach (var movie in Model)
+{
+    if (movie != null)
+    {
+        @movie.Movie
+        <a href="/Home/RemoveFavorite?id=@movie.MovieId" class="btn btn-danger" type="submit">Remove</a>
+        
+    }
+}
